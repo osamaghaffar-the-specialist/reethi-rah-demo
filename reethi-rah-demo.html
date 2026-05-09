@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One&Only Reethi Rah — Luxury Maldives Island Resort</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#07080a;
+  --dark:#0e0f12;
+  --dark2:#141519;
+  --dark3:#1c1d22;
+  --gold:#c4a35a;
+  --gold-light:#e2c98a;
+  --gold-dim:rgba(196,163,90,0.15);
+  --white:#f4f0e8;
+  --white2:#d8d2c4;
+  --muted:#7a7870;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden}
+
+/* ── CURSOR ── */
+#cur{position:fixed;width:6px;height:6px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .2s}
+#cur-ring{position:fixed;width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .12s,top .12s;opacity:.5}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:30px 64px;transition:all .5s}
+nav.on{background:rgba(7,8,10,.93);padding:16px 64px;border-bottom:1px solid var(--gold-dim);backdrop-filter:blur(16px)}
+.logo{font-family:'Playfair Display',serif;font-size:18px;letter-spacing:4px;color:var(--gold-light);text-decoration:none;text-transform:uppercase;line-height:1.3}
+.logo em{font-style:normal;color:var(--white);font-size:10px;letter-spacing:6px;display:block;font-family:'Montserrat',sans-serif;font-weight:300;margin-top:2px}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{color:var(--white2);text-decoration:none;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:500;transition:color .3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{border:1px solid var(--gold);color:var(--gold);padding:11px 28px;font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:600;text-decoration:none;font-family:'Montserrat',sans-serif;transition:all .3s}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+
+/* ── HERO ── */
+/* HERO: Uses aerial water villa image — the most iconic shot */
+.hero{height:100vh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(160deg,rgba(7,8,10,.2) 0%,rgba(7,8,10,.08) 40%,rgba(7,8,10,.75) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 64px 90px;max-width:660px}
+.hero-tag{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:22px}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(50px,6.5vw,92px);line-height:1.02;font-weight:400;margin-bottom:24px}
+.hero-h1 em{font-style:italic;color:var(--gold-light)}
+.hero-p{font-family:'Cormorant Garamond',serif;font-size:20px;line-height:1.75;color:var(--white2);margin-bottom:44px;font-weight:300}
+.hero-btns{display:flex;align-items:center;gap:36px}
+.btn-g{background:var(--gold);color:var(--black);padding:17px 48px;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:700;text-decoration:none;font-family:'Montserrat',sans-serif;transition:background .3s;display:inline-block}
+.btn-g:hover{background:var(--gold-light)}
+.btn-o{color:var(--white2);font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:14px;transition:color .3s}
+.btn-o::after{content:'';width:36px;height:1px;background:var(--gold);transition:width .3s}
+.btn-o:hover{color:var(--gold)}
+.btn-o:hover::after{width:56px}
+.hero-scroll{position:absolute;bottom:44px;right:64px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px}
+.hero-scroll span{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl}
+.scroll-bar{width:1px;height:52px;background:linear-gradient(to bottom,var(--gold),transparent);animation:sb 2.2s ease infinite}
+@keyframes sb{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ── TICKER ── */
+.ticker{background:var(--gold);padding:13px 0;overflow:hidden;white-space:nowrap}
+.ticker-inner{display:inline-flex;animation:tick 28s linear infinite}
+.ti{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--black);font-weight:700;padding:0 44px}
+.td{color:rgba(0,0,0,.35);padding:0 8px}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── INTRO: left text, right = aerial island image ── */
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:620px}
+.intro-text{background:var(--dark2);padding:100px 72px;display:flex;flex-direction:column;justify-content:center}
+.eyebrow{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:24px}
+.intro-text h2{font-family:'Playfair Display',serif;font-size:clamp(34px,3.5vw,52px);line-height:1.12;font-weight:400;margin-bottom:28px}
+.intro-text h2 em{font-style:italic;color:var(--gold-light)}
+.intro-text p{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.9;color:var(--white2);font-weight:300;margin-bottom:16px}
+.txt-link{color:var(--gold);font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:12px;margin-top:20px;transition:gap .3s}
+.txt-link:hover{gap:22px}
+.txt-link::after{content:'→'}
+/* RIGHT: aerial island overview image */
+.intro-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:620px}
+
+/* ── STATS ── */
+.stats{background:var(--dark3);display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--gold-dim);border-bottom:1px solid var(--gold-dim)}
+.stat{padding:52px 32px;text-align:center;border-right:1px solid var(--gold-dim)}
+.stat:last-child{border:none}
+.stat-n{font-family:'Playfair Display',serif;font-size:54px;font-weight:400;color:var(--gold);line-height:1;margin-bottom:12px}
+.stat-l{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:500}
+
+/* ── VILLAS: 3 cards with real villa images ── */
+.villas{padding:120px 64px;background:var(--dark)}
+.sec-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:64px}
+.sec-hd-l .eyebrow{margin-bottom:16px}
+.sec-hd-l h2{font-family:'Playfair Display',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.12}
+.sec-hd-l h2 em{font-style:italic;color:var(--gold-light)}
+.sec-link{color:var(--gold);font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:12px;white-space:nowrap;transition:gap .3s}
+.sec-link:hover{gap:20px}
+.sec-link::after{content:'→'}
+.villas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.v-card{position:relative;overflow:hidden;cursor:default}
+.v-card-img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.25,.46,.45,.94)}
+.v-card:hover .v-card-img{transform:scale(1.06)}
+.v-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,8,10,.88) 0%,rgba(7,8,10,.15) 55%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:36px 30px;transition:background .5s}
+.v-card:hover .v-overlay{background:linear-gradient(to top,rgba(7,8,10,.94) 0%,rgba(7,8,10,.35) 60%,transparent 100%)}
+.v-cat{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
+.v-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;line-height:1.2;margin-bottom:12px}
+.v-desc{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--white2);line-height:1.6;font-weight:300;max-height:0;overflow:hidden;transition:max-height .5s}
+.v-card:hover .v-desc{max-height:70px}
+.v-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.v-tag{font-size:7px;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(196,163,90,.4);color:var(--gold);padding:5px 10px}
+.v-arrow{color:var(--gold);margin-top:16px;font-size:16px;opacity:0;transform:translateX(-10px);transition:all .4s}
+.v-card:hover .v-arrow{opacity:1;transform:translateX(0)}
+
+/* ── DINING SPLIT: text left, restaurant image right ── */
+/* Restaurant image: Tapasake at night — the dramatic overwater dining shot */
+.dining{display:grid;grid-template-columns:1fr 1fr;min-height:680px}
+.dining-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:680px}
+.dining-text{background:var(--dark2);padding:100px 72px;display:flex;flex-direction:column;justify-content:center}
+.dining-text h2{font-family:'Playfair Display',serif;font-size:clamp(32px,3.2vw,50px);line-height:1.12;font-weight:400;margin-bottom:24px}
+.dining-text h2 em{font-style:italic;color:var(--gold-light)}
+.dining-text p{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.9;color:var(--white2);font-weight:300;margin-bottom:14px}
+.dining-tags{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 36px}
+.d-tag{font-size:8px;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(196,163,90,.35);color:var(--gold-light);padding:9px 18px}
+.dining-nums{display:flex;gap:48px;margin-top:40px;padding-top:40px;border-top:1px solid var(--gold-dim)}
+.d-n .n{font-family:'Playfair Display',serif;font-size:44px;color:var(--gold);line-height:1}
+.d-n .l{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+/* ── EXPERIENCES GRID: 4 image cards ── */
+.exp{padding:120px 64px;background:var(--dark)}
+.exp-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:320px 320px;gap:2px;margin-top:64px}
+.e-card{position:relative;overflow:hidden;cursor:default}
+.e-card:first-child{grid-row:span 2}
+.e-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
+.e-card:hover .e-img{transform:scale(1.06)}
+.e-over{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,8,10,.85) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:30px}
+.e-cat{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px}
+.e-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;line-height:1.2;margin-bottom:10px}
+.e-desc{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--white2);line-height:1.6;font-weight:300;max-height:0;overflow:hidden;transition:max-height .5s}
+.e-card:hover .e-desc{max-height:60px}
+
+/* ── QUOTE ── */
+.quote{background:var(--gold);padding:88px 64px;text-align:center;position:relative;overflow:hidden}
+.quote::before{content:'\201C';position:absolute;top:-60px;left:50%;transform:translateX(-50%);font-family:'Playfair Display',serif;font-size:280px;color:rgba(0,0,0,.07);line-height:1;pointer-events:none}
+.quote q{font-family:'Playfair Display',serif;font-size:clamp(20px,2.8vw,36px);font-weight:400;font-style:italic;color:var(--black);line-height:1.5;max-width:860px;display:block;margin:0 auto 28px;position:relative;z-index:2}
+.quote-by{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(0,0,0,.55);font-weight:600;position:relative;z-index:2}
+
+/* ── GALLERY: 5 images in mosaic ── */
+/* Gallery uses: aerial, overwater villas, dining, beach, spa */
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:300px 300px;gap:2px}
+.g-item{overflow:hidden}
+.g-item:first-child{grid-row:span 2}
+.g-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
+.g-item:hover img{transform:scale(1.05)}
+
+/* ── LOCATION ── */
+.location{display:grid;grid-template-columns:1fr 1fr;background:var(--dark2)}
+.loc-text{padding:100px 72px;display:flex;flex-direction:column;justify-content:center}
+.loc-text h2{font-family:'Playfair Display',serif;font-size:clamp(30px,3vw,46px);font-weight:400;line-height:1.15;margin-bottom:24px}
+.loc-text h2 em{font-style:italic;color:var(--gold-light)}
+.loc-text p{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.9;color:var(--white2);font-weight:300;margin-bottom:12px}
+.trans{list-style:none;margin-top:36px;display:flex;flex-direction:column;gap:14px}
+.trans li{display:flex;align-items:center;gap:20px;padding:18px 22px;border:1px solid var(--gold-dim);font-size:12px;color:var(--white2)}
+.trans li strong{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);font-weight:600;margin-bottom:4px}
+.trans li span{font-size:18px}
+/* Location right: aerial view of the atoll/ocean */
+.loc-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:600px}
+
+/* ── BOOKING ── */
+.booking{background:var(--dark3);padding:100px 64px;text-align:center;border-top:1px solid var(--gold-dim);border-bottom:1px solid var(--gold-dim)}
+.booking .eyebrow{margin-bottom:20px}
+.booking h2{font-family:'Playfair Display',serif;font-size:clamp(34px,4vw,58px);font-weight:400;line-height:1.08;margin-bottom:14px}
+.booking h2 em{font-style:italic;color:var(--gold-light)}
+.booking p{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white2);margin-bottom:52px;font-weight:300}
+.b-form{display:flex;max-width:880px;margin:0 auto;border:1px solid rgba(196,163,90,.3)}
+.b-field{flex:1;padding:20px 26px;border-right:1px solid rgba(196,163,90,.18);text-align:left}
+.b-field:last-of-type{border-right:none}
+.b-field label{display:block;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px}
+.b-field input{background:transparent;border:none;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;font-weight:300;width:100%;outline:none}
+.b-field input::placeholder{color:var(--muted)}
+.b-btn{background:var(--gold);color:var(--black);border:none;padding:20px 44px;font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:700;font-family:'Montserrat',sans-serif;cursor:default;transition:background .3s;white-space:nowrap}
+.b-btn:hover{background:var(--gold-light)}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);padding:72px 64px 36px;border-top:1px solid var(--gold-dim)}
+.ft{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px}
+.ft-brand .logo{font-family:'Playfair Display',serif;font-size:18px;letter-spacing:3px;color:var(--gold-light);text-transform:uppercase;display:block;margin-bottom:16px}
+.ft-brand p{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--muted);line-height:1.85;font-weight:300;max-width:260px}
+.ft-col h4{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:22px}
+.ft-col ul{list-style:none}
+.ft-col li{margin-bottom:11px}
+.ft-col a{color:var(--muted);font-size:13px;text-decoration:none;transition:color .3s;font-weight:300}
+.ft-col a:hover{color:var(--gold-light)}
+.ft-bot{border-top:1px solid var(--gold-dim);padding-top:26px;display:flex;align-items:center;justify-content:space-between}
+.ft-bot p{font-size:11px;color:var(--muted);letter-spacing:.5px}
+.ft-soc{display:flex;gap:12px}
+.ft-soc a{width:34px;height:34px;border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:12px;text-decoration:none;transition:all .3s}
+.ft-soc a:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+
+/* ── REVEAL ANIMATION ── */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+
+@media(max-width:960px){
+  nav{padding:18px 28px}
+  nav.on{padding:14px 28px}
+  .hero-content{padding:0 28px 60px}
+  .hero-h1{font-size:clamp(38px,8vw,64px)}
+  .intro,.dining,.location{grid-template-columns:1fr}
+  .intro-img,.dining-img,.loc-img{min-height:380px;height:380px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .villas-grid{grid-template-columns:1fr}
+  .exp-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .e-card:first-child{grid-row:auto;height:340px}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .g-item:first-child{grid-row:auto;height:280px}
+  .ft{grid-template-columns:1fr 1fr;gap:36px}
+  .villas,.exp,.quote,.booking{padding:80px 28px}
+  .b-form{flex-direction:column}
+  .b-field{border-right:none;border-bottom:1px solid rgba(196,163,90,.18)}
+  .dining-text,.loc-text,.intro-text{padding:64px 28px}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">One&amp;Only<em>Reethi Rah</em></a>
+  <ul class="nav-links">
+    <li><a href="#villas">Villas</a></li>
+    <li><a href="#dining">Dining</a></li>
+    <li><a href="#exp">Experiences</a></li>
+    <li><a href="#loc">Getting Here</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Reserve Now</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+     Image: Aerial Water Villas (main iconic shot)
+     Source: kerzner CDN — 1868fe6a (w1920 version)
+══════════════════════════════════════════════ -->
+<section class="hero">
+  <img class="hero-img"
+    src="https://assets.kerzner.com/api/public/content/1868fe6a015948bda035737c192edb9d?v=c2c395a7&t=w1440"
+    alt="One&Only Reethi Rah — Aerial Water Villas">
+  <div class="hero-grad"></div>
+  <div class="hero-content">
+    <p class="hero-tag">North Malé Atoll · Maldives</p>
+    <h1 class="hero-h1">Where Do You<br><em>Want To Go?</em></h1>
+    <p class="hero-p">Be surrounded by azure sky and ocean, immersed in our iconic over-water villas in the Maldives.</p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-g">Reserve Your Villa</a>
+      <a href="#villas" class="btn-o">Explore Villas</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-bar"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ti">Over-Water Villas</span><span class="td">✦</span>
+    <span class="ti">8 Restaurants & 5 Bars</span><span class="td">✦</span>
+    <span class="ti">Private Beach Access</span><span class="td">✦</span>
+    <span class="ti">ONE&ONLY Spa</span><span class="td">✦</span>
+    <span class="ti">Submarine Excursions</span><span class="td">✦</span>
+    <span class="ti">45 Min from Malé Airport</span><span class="td">✦</span>
+    <span class="ti">Over-Water Villas</span><span class="td">✦</span>
+    <span class="ti">8 Restaurants & 5 Bars</span><span class="td">✦</span>
+    <span class="ti">Private Beach Access</span><span class="td">✦</span>
+    <span class="ti">ONE&ONLY Spa</span><span class="td">✦</span>
+    <span class="ti">Submarine Excursions</span><span class="td">✦</span>
+    <span class="ti">45 Min from Malé Airport</span><span class="td">✦</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     INTRO SPLIT
+     Left: Text | Right: Aerial island overview image
+     Image: bfe60ad9 — aerial view of full island
+══════════════════════════════════════════════ -->
+<section class="intro rv">
+  <div class="intro-text">
+    <p class="eyebrow">An Extraordinary Island</p>
+    <h2>Luxurious Living<br>Beyond <em>Imagination</em></h2>
+    <p>Nestled in the North Malé Atoll, One&amp;Only Reethi Rah is one of the largest islands in the Maldives — stretched across pristine white beaches surrounded by crystalline turquoise lagoons.</p>
+    <p>Choose between our remarkable over-water villas, secluded beachfront villas, and extraordinary private residences, each a world unto itself.</p>
+    <a href="#villas" class="txt-link">Explore Accommodations</a>
+  </div>
+  <img class="intro-img"
+    src="https://assets.kerzner.com/api/public/content/bfe60ad9372147639a7ef004fdc5034b?v=01da9a13&t=w1440"
+    alt="Aerial view of One&Only Reethi Rah island">
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat rv"><div class="stat-n">130</div><div class="stat-l">Exclusive Villas & Residences</div></div>
+  <div class="stat rv"><div class="stat-n">8</div><div class="stat-l">World-Class Restaurants</div></div>
+  <div class="stat rv"><div class="stat-n">2km</div><div class="stat-l">Of Private White Beaches</div></div>
+  <div class="stat rv"><div class="stat-n">5★</div><div class="stat-l">Ultra-Luxury Island Resort</div></div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     VILLAS: 3 image cards
+     Card 1: Water Villa aerial (1868fe6a)
+     Card 2: Island/beach villa (bfe60ad9)
+     Card 3: Dining/residences (bec49cd2)
+══════════════════════════════════════════════ -->
+<section class="villas rv" id="villas">
+  <div class="sec-hd">
+    <div class="sec-hd-l">
+      <p class="eyebrow">Where You'll Stay</p>
+      <h2>Remarkable <em>Villas</em><br>& Residences</h2>
+    </div>
+    <a href="https://www.oneandonlyresorts.com/reethi-rah/accommodation" class="sec-link">All Villas</a>
+  </div>
+  <div class="villas-grid">
+
+    <!-- Villa 1: Over-Water — uses aerial water villas shot -->
+    <div class="v-card">
+      <img class="v-card-img"
+        src="https://assets.kerzner.com/api/public/content/1868fe6a015948bda035737c192edb9d?v=c2c395a7&t=w1440"
+        alt="Grand Water Villa — aerial view">
+      <div class="v-overlay">
+        <p class="v-cat">Over-Water Villa</p>
+        <h3 class="v-name">Grand Water Villa</h3>
+        <p class="v-desc">Suspended above the turquoise lagoon with direct ocean access, a private sundeck, and panoramic ocean views from every room.</p>
+        <div class="v-tags">
+          <span class="v-tag">Private Pool</span>
+          <span class="v-tag">Ocean View</span>
+          <span class="v-tag">Butler Service</span>
+        </div>
+        <div class="v-arrow">→ Reserve</div>
+      </div>
+    </div>
+
+    <!-- Villa 2: Beach Villa — uses aerial island image -->
+    <div class="v-card">
+      <img class="v-card-img"
+        src="https://assets.kerzner.com/api/public/content/bfe60ad9372147639a7ef004fdc5034b?v=01da9a13&t=w1440"
+        alt="Sunset Beach Villa">
+      <div class="v-overlay">
+        <p class="v-cat">Beachfront Villa</p>
+        <h3 class="v-name">Sunset Beach Villa</h3>
+        <p class="v-desc">A secluded beachfront sanctuary with lush tropical gardens, direct beach access, and breathtaking sunset panoramas.</p>
+        <div class="v-tags">
+          <span class="v-tag">Beach Access</span>
+          <span class="v-tag">Garden Pool</span>
+          <span class="v-tag">Private Terrace</span>
+        </div>
+        <div class="v-arrow">→ Reserve</div>
+      </div>
+    </div>
+
+    <!-- Villa 3: Residence — uses dining/atmosphere image -->
+    <div class="v-card">
+      <img class="v-card-img"
+        src="https://assets.kerzner.com/api/public/content/bec49cd243f94d6e93917f1afcdeba2c?v=62190df5&t=w1440"
+        alt="The Grand Residences">
+      <div class="v-overlay">
+        <p class="v-cat">Private Residence</p>
+        <h3 class="v-name">The Grand Residences</h3>
+        <p class="v-desc">The pinnacle of island living — multi-bedroom private estates with dedicated staff, private pools, and exclusive beach frontage.</p>
+        <div class="v-tags">
+          <span class="v-tag">4-6 Bedrooms</span>
+          <span class="v-tag">Private Chef</span>
+          <span class="v-tag">Exclusive Beach</span>
+        </div>
+        <div class="v-arrow">→ Reserve</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     DINING SPLIT
+     Left: Tapasake restaurant night image (bec49cd2)
+     Right: Text about dining
+     The restaurant image is the MOST dramatic — overwater at night
+══════════════════════════════════════════════ -->
+<section class="dining rv" id="dining">
+  <!-- LEFT: Tapasake restaurant at night — overwater, dramatic lighting -->
+  <img class="dining-img"
+    src="https://assets.kerzner.com/api/public/content/bec49cd243f94d6e93917f1afcdeba2c?v=62190df5&t=w1440"
+    alt="Tapasake Restaurant at One&Only Reethi Rah — overwater dining at night">
+  <div class="dining-text">
+    <p class="eyebrow">Culinary Excellence</p>
+    <h2>World-Class<br><em>Restaurants</em></h2>
+    <p>Experience the finest gastronomic journeys with a choice of eight restaurants and five bars at One&amp;Only Reethi Rah.</p>
+    <p>From Japanese Tapas served over the glistening ocean at Tapasake, to beach-side grills under a canopy of stars — every meal is a celebration.</p>
+    <div class="dining-tags">
+      <span class="d-tag">Tapasake · Japanese</span>
+      <span class="d-tag">Reethi Restaurant</span>
+      <span class="d-tag">Fanditha · Teppanyaki</span>
+      <span class="d-tag">Botanica</span>
+      <span class="d-tag">Reethi Beach Bar</span>
+    </div>
+    <a href="https://www.oneandonlyresorts.com/reethi-rah/dining" class="btn-g">Explore Dining</a>
+    <div class="dining-nums">
+      <div class="d-n"><div class="n">8</div><div class="l">Restaurants</div></div>
+      <div class="d-n"><div class="n">5</div><div class="l">Bars & Lounges</div></div>
+      <div class="d-n"><div class="n">3</div><div class="l">Starred Concepts</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     EXPERIENCES: 4-image grid
+     Large left: Water villas aerial (hero feel)
+     Top right: Island aerial
+     Bottom right 1: Dining at night
+     Bottom right 2: Beach villa
+══════════════════════════════════════════════ -->
+<section class="exp rv" id="exp">
+  <div class="sec-hd">
+    <div class="sec-hd-l">
+      <p class="eyebrow">Life on the Island</p>
+      <h2>Curated <em>Experiences</em><br>Beyond Compare</h2>
+    </div>
+    <a href="https://www.oneandonlyresorts.com/reethi-rah" class="sec-link">All Experiences</a>
+  </div>
+  <div class="exp-grid">
+
+    <!-- LARGE LEFT: Ocean/Water sports — water villas aerial -->
+    <div class="e-card">
+      <img class="e-img"
+        src="https://assets.kerzner.com/api/public/content/1868fe6a015948bda035737c192edb9d?v=c2c395a7&t=w1440"
+        alt="Ocean Adventures — Water Villas">
+      <div class="e-over">
+        <p class="e-cat">Water Sports</p>
+        <h3 class="e-title">Ocean Adventures</h3>
+        <p class="e-desc">Dive into crystal-clear lagoons for world-class snorkelling, scuba diving, kayaking, and sunset sailing.</p>
+      </div>
+    </div>
+
+    <!-- TOP RIGHT 1: Wellness — island overview -->
+    <div class="e-card">
+      <img class="e-img"
+        src="https://assets.kerzner.com/api/public/content/bfe60ad9372147639a7ef004fdc5034b?v=01da9a13&t=w1440"
+        alt="ONE&ONLY Spa">
+      <div class="e-over">
+        <p class="e-cat">Wellness</p>
+        <h3 class="e-title">ONE&ONLY Spa</h3>
+        <p class="e-desc">Transformative treatments in our overwater spa sanctuary.</p>
+      </div>
+    </div>
+
+    <!-- TOP RIGHT 2: Dining at night -->
+    <div class="e-card">
+      <img class="e-img"
+        src="https://assets.kerzner.com/api/public/content/2d2d681e7a7c4d3fb7bc93f91d907894?v=c1763598&t=w576"
+        alt="Outdoor Breakfast Dining">
+      <div class="e-over">
+        <p class="e-cat">Dining</p>
+        <h3 class="e-title">Island Breakfast</h3>
+        <p class="e-desc">Alfresco breakfast on the ocean deck as the sun rises over the atoll.</p>
+      </div>
+    </div>
+
+    <!-- BOTTOM RIGHT 3: Romance -->
+    <div class="e-card">
+      <img class="e-img"
+        src="https://assets.kerzner.com/api/public/content/bec49cd243f94d6e93917f1afcdeba2c?v=62190df5&t=w1440"
+        alt="Romance — Tapasake at night">
+      <div class="e-over">
+        <p class="e-cat">Romance</p>
+        <h3 class="e-title">Sunset & Stars</h3>
+        <p class="e-desc">Private beach dinners and moonlit cruises curated just for two.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote rv">
+  <q>One&amp;Only Reethi Rah is simply the most extraordinary place I have ever stayed. The magic of the Maldives, perfected.</q>
+  <p class="quote-by">— Condé Nast Traveller, Gold List</p>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     GALLERY MOSAIC: 5 images
+     Large left (2-row span): Island aerial — bfe60ad9
+     Top middle: Water villas — 1868fe6a
+     Top right: Tapasake — bec49cd2
+     Bottom middle: Breakfast deck — 2d2d681e
+     Bottom right: Villas aerial crop — 1868fe6a (variant)
+══════════════════════════════════════════════ -->
+<div class="gallery">
+  <!-- LARGE: Full island aerial -->
+  <div class="g-item">
+    <img src="https://assets.kerzner.com/api/public/content/bfe60ad9372147639a7ef004fdc5034b?v=01da9a13&t=w1440"
+      alt="Aerial view of One&Only Reethi Rah">
+  </div>
+  <!-- Water villas from above -->
+  <div class="g-item">
+    <img src="https://assets.kerzner.com/api/public/content/1868fe6a015948bda035737c192edb9d?v=c2c395a7&t=w1440"
+      alt="Over-Water Villas">
+  </div>
+  <!-- Tapasake restaurant at night -->
+  <div class="g-item">
+    <img src="https://assets.kerzner.com/api/public/content/bec49cd243f94d6e93917f1afcdeba2c?v=62190df5&t=w1440"
+      alt="Tapasake Restaurant at Night">
+  </div>
+  <!-- Breakfast deck outdoor -->
+  <div class="g-item">
+    <img src="https://assets.kerzner.com/api/public/content/2d2d681e7a7c4d3fb7bc93f91d907894?v=c1763598&t=w576"
+      alt="Reethi Breakfast Outdoor Deck">
+  </div>
+  <!-- Villa aerial variant -->
+  <div class="g-item">
+    <img src="https://assets.kerzner.com/api/public/content/1868fe6a015948bda035737c192edb9d?v=fecbd027&t=w576"
+      alt="Private Villas">
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     LOCATION SPLIT
+     Left: Text + transport info
+     Right: Aerial ocean/atoll image
+══════════════════════════════════════════════ -->
+<section class="location rv" id="loc">
+  <div class="loc-text">
+    <p class="eyebrow">Getting Here</p>
+    <h2>Your Journey<br>to <em>Paradise</em></h2>
+    <p>One&amp;Only Reethi Rah is located in the North Malé Atoll, accessible by speedboat or seaplane from Velana International Airport.</p>
+    <p>Our dedicated concierge team will arrange all transfers to ensure your journey is as seamless and spectacular as your stay.</p>
+    <ul class="trans">
+      <li>
+        <span>🚤</span>
+        <div><strong>Speedboat Transfer</strong>45 minutes from Velana International Airport</div>
+      </li>
+      <li>
+        <span>✈️</span>
+        <div><strong>Seaplane Transfer</strong>20 minutes — panoramic aerial views of the atoll</div>
+      </li>
+      <li>
+        <span>🚁</span>
+        <div><strong>Helicopter Charter</strong>Available on request, private arrangements</div>
+      </li>
+    </ul>
+  </div>
+  <!-- RIGHT: Water villas aerial — shows the ocean approach -->
+  <img class="loc-img"
+    src="https://assets.kerzner.com/api/public/content/bfe60ad9372147639a7ef004fdc5034b?v=01da9a13&t=w1440"
+    alt="Approaching One&Only Reethi Rah by sea">
+</section>
+
+<!-- BOOKING -->
+<section class="booking rv" id="booking">
+  <p class="eyebrow">Begin Your Journey</p>
+  <h2>Reserve Your<br><em>Island Retreat</em></h2>
+  <p>Experience the extraordinary. Your Maldives escape awaits.</p>
+  <div class="b-form">
+    <div class="b-field">
+      <label>Arrival</label>
+      <input type="text" placeholder="Select Date">
+    </div>
+    <div class="b-field">
+      <label>Departure</label>
+      <input type="text" placeholder="Select Date">
+    </div>
+    <div class="b-field">
+      <label>Guests</label>
+      <input type="text" placeholder="2 Adults">
+    </div>
+    <button class="b-btn">Check Availability</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div class="ft-brand">
+      <span class="logo">One&amp;Only Reethi Rah</span>
+      <p>An extraordinary island resort in the North Malé Atoll, where barefoot luxury meets world-class sophistication in the heart of the Indian Ocean.</p>
+    </div>
+    <div class="ft-col">
+      <h4>The Resort</h4>
+      <ul>
+        <li><a href="#">Villas & Residences</a></li>
+        <li><a href="#">Dining</a></li>
+        <li><a href="#">Wellness & Spa</a></li>
+        <li><a href="#">Experiences</a></li>
+        <li><a href="#">Weddings</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Plan Your Stay</h4>
+      <ul>
+        <li><a href="#">Reservations</a></li>
+        <li><a href="#">Special Offers</a></li>
+        <li><a href="#">Getting Here</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+9606648800">+960 664 8800</a></li>
+        <li><a href="mailto:reservations@oneandonlyreethirah.com">Email Us</a></li>
+        <li><a href="#">North Malé Atoll</a></li>
+        <li><a href="#">Republic of Maldives</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <p>© 2026 One&Only Reethi Rah · Part of the Kerzner International Group · All Rights Reserved</p>
+    <div class="ft-soc">
+      <a href="#">f</a>
+      <a href="#">in</a>
+      <a href="#">ig</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+(function anim(){
+  rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(anim);
+})();
+
+// Nav scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('on',scrollY>50);
+});
+
+// Reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting)setTimeout(()=>e.target.classList.add('in'),i*60);
+  });
+},{threshold:0.08});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
